@@ -2,12 +2,18 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created by: PyQt5 UI code generator 5.14.1
+# Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Sequence:
+    def __init__(self):
+        self.elements = []
+        self.matrix = []
 
 
 class Ui_MainWindow(object):
@@ -289,9 +295,15 @@ class Ui_MainWindow(object):
         self.label_bubble = QtWidgets.QLabel(self.frame_bubble)
         self.label_bubble.setObjectName("label_bubble")
         self.hLayout_bubble.addWidget(self.label_bubble)
-        self.pushButton_bubble = QtWidgets.QPushButton(self.frame_bubble)
-        self.pushButton_bubble.setObjectName("pushButton_bubble")
-        self.hLayout_bubble.addWidget(self.pushButton_bubble)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.hLayout_bubble.addItem(spacerItem5)
+        self.radioButton_on = QtWidgets.QRadioButton(self.frame_bubble)
+        self.radioButton_on.setObjectName("radioButton_on")
+        self.hLayout_bubble.addWidget(self.radioButton_on)
+        self.radioButton_on.setChecked(True)
+        self.radioButton_off = QtWidgets.QRadioButton(self.frame_bubble)
+        self.radioButton_off.setObjectName("radioButton_off")
+        self.hLayout_bubble.addWidget(self.radioButton_off)
         self.gridLayout_7.addLayout(self.hLayout_bubble, 0, 0, 1, 1)
         self.verticalLayout.addWidget(self.frame_bubble)
         self.pushButton_start = QtWidgets.QPushButton(self.page_main)
@@ -340,8 +352,8 @@ class Ui_MainWindow(object):
         self.pushButton_apply.setObjectName("pushButton_apply")
         self.hLayout_setting.addWidget(self.pushButton_apply)
         self.gridLayout_6.addLayout(self.hLayout_setting, 1, 0, 1, 1)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_6.addItem(spacerItem5, 2, 0, 1, 1)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_6.addItem(spacerItem6, 2, 0, 1, 1)
         self.gridLayout_2.addWidget(self.box_setting, 0, 0, 1, 1)
         self.stack.addWidget(self.page_database)
         self.page_shortcuts = QtWidgets.QWidget()
@@ -361,8 +373,8 @@ class Ui_MainWindow(object):
         self.label_shortcut1Name.setAlignment(QtCore.Qt.AlignCenter)
         self.label_shortcut1Name.setObjectName("label_shortcut1Name")
         self.hLayout_shortcut1.addWidget(self.label_shortcut1Name)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.hLayout_shortcut1.addItem(spacerItem6)
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.hLayout_shortcut1.addItem(spacerItem7)
         self.label_shortcut1 = QtWidgets.QLabel(self.box_shortcuts)
         self.label_shortcut1.setObjectName("label_shortcut1")
         self.hLayout_shortcut1.addWidget(self.label_shortcut1)
@@ -374,8 +386,8 @@ class Ui_MainWindow(object):
         self.label_shortcut2Name.setAlignment(QtCore.Qt.AlignCenter)
         self.label_shortcut2Name.setObjectName("label_shortcut2Name")
         self.hLayout_shortcut2.addWidget(self.label_shortcut2Name)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.hLayout_shortcut2.addItem(spacerItem7)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.hLayout_shortcut2.addItem(spacerItem8)
         self.label_shortcut2 = QtWidgets.QLabel(self.box_shortcuts)
         self.label_shortcut2.setObjectName("label_shortcut2")
         self.hLayout_shortcut2.addWidget(self.label_shortcut2)
@@ -383,8 +395,8 @@ class Ui_MainWindow(object):
         self.pushButton_ok = QtWidgets.QPushButton(self.box_shortcuts)
         self.pushButton_ok.setObjectName("pushButton_ok")
         self.vLayout_shortcuts.addWidget(self.pushButton_ok)
-        spacerItem8 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.vLayout_shortcuts.addItem(spacerItem8)
+        spacerItem9 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.vLayout_shortcuts.addItem(spacerItem9)
         self.gridLayout_5.addLayout(self.vLayout_shortcuts, 0, 0, 1, 1)
         self.gridLayout_4.addWidget(self.box_shortcuts, 0, 0, 1, 1)
         self.stack.addWidget(self.page_shortcuts)
@@ -394,6 +406,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.stack.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.initializeClass()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -418,7 +432,8 @@ class Ui_MainWindow(object):
         self.label_dwell.setText(_translate("MainWindow", "Dwell Timer:"))
         self.label_dwellunit.setText(_translate("MainWindow", "second(s)"))
         self.label_bubble.setText(_translate("MainWindow", "Gaze Visalizaition"))
-        self.pushButton_bubble.setText(_translate("MainWindow", "on / off"))
+        self.radioButton_on.setText(_translate("MainWindow", "On"))
+        self.radioButton_off.setText(_translate("MainWindow", "Off"))
         self.pushButton_start.setText(_translate("MainWindow", "Start"))
         self.box_setting.setTitle(_translate("MainWindow", "Database Setting"))
         self.table.setSortingEnabled(False)
@@ -446,6 +461,57 @@ class Ui_MainWindow(object):
 "(Start/End)"))
         self.label_shortcut2.setText(_translate("MainWindow", "2"))
         self.pushButton_ok.setText(_translate("MainWindow", "OK"))
+
+    def initializeClass(self):
+        self.sequence = Sequence()
+        self.sequence.elements.append(self.lineEdit_seq0)
+        self.sequence.elements.append(self.lineEdit_seq1)
+        self.sequence.elements.append(self.lineEdit_seq2)
+        self.sequence.elements.append(self.lineEdit_seq3)
+        self.sequence.elements.append(self.lineEdit_seq4)
+        self.sequence.elements.append(self.lineEdit_seq5)
+        self.sequence.elements.append(self.lineEdit_seq6)
+        self.sequence.elements.append(self.lineEdit_seq7)
+
+        row = []
+        row.append(self.lineEdit_board00)
+        row.append(self.lineEdit_board01)
+        row.append(self.lineEdit_board02)
+        row.append(self.lineEdit_board03)
+        row.append(self.lineEdit_board04)
+        self.sequence.matrix.append(row)
+
+        row = []
+        row.append(self.lineEdit_board10)
+        row.append(self.lineEdit_board11)
+        row.append(self.lineEdit_board12)
+        row.append(self.lineEdit_board13)
+        row.append(self.lineEdit_board14)
+        self.sequence.matrix.append(row)
+
+        row = []
+        row.append(self.lineEdit_board20)
+        row.append(self.lineEdit_board21)
+        row.append(self.lineEdit_board22)
+        row.append(self.lineEdit_board23)
+        row.append(self.lineEdit_board24)
+        self.sequence.matrix.append(row)
+
+        row = []
+        row.append(self.lineEdit_board30)
+        row.append(self.lineEdit_board31)
+        row.append(self.lineEdit_board32)
+        row.append(self.lineEdit_board33)
+        row.append(self.lineEdit_board34)
+        self.sequence.matrix.append(row)
+
+        row = []
+        row.append(self.lineEdit_board40)
+        row.append(self.lineEdit_board41)
+        row.append(self.lineEdit_board42)
+        row.append(self.lineEdit_board43)
+        row.append(self.lineEdit_board44)
+        self.sequence.matrix.append(row)
 
 
 if __name__ == "__main__":

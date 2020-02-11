@@ -475,9 +475,29 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_bubble">
+              <spacer name="horizontalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButton_on">
                <property name="text">
-                <string>on / off</string>
+                <string>On</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButton_off">
+               <property name="text">
+                <string>Off</string>
                </property>
               </widget>
              </item>

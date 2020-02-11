@@ -10,7 +10,6 @@ from src.exception import Error
 
 
 def warn(error):
-    print("warn")
     if error.is_true is False: return
 
     msg = QMessageBox()
@@ -30,6 +29,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.add_button_clicked()
         self.add_checkbox_changed()
         self.add_edit_entered()
+        self.hide_boxes()
 
     def init_objects(self):
         self.database = Database(self.table, self.lineEdit_dbid, self.checkBox_dbid)
@@ -38,6 +38,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def add_button_clicked(self):
         self.pushButton_shortcuts.clicked.connect(self.on_click)
         self.pushButton_dbsetting.clicked.connect(self.on_click)
+        self.pushButton_start.clicked.connect(self.on_click)
         self.pushButton_ok.clicked.connect(self.on_shortcuts_click)
         self.pushButton_cancel.clicked.connect(self.on_database_click)
         self.pushButton_apply.clicked.connect(self.on_database_click)
@@ -48,6 +49,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def add_edit_entered(self):
         self.lineEdit_dbid.returnPressed.connect(self.on_enter)
 
+    def hide_boxes(self):
+        self.box_detailed.hide()
+        self.box_board.hide()
+
     @pyqtSlot()
     def on_click(self):
         sending_button = self.sender()
@@ -55,6 +60,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.stack.setCurrentWidget(self.page_shortcuts)
         if eq(sending_button.objectName(), "pushButton_dbsetting"):
             self.stack.setCurrentWidget(self.page_database)
+        if eq(sending_button.objectName(), "pushButton_start"):
+            print("checking")
 
     @pyqtSlot()
     def on_shortcuts_click(self):
