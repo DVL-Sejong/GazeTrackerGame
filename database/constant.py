@@ -1,0 +1,6 @@
+HOST = ''
+USER = ''
+PASSWORD = ''
+DB_NAME = ''
+CHARSET = ''
+TABLE = ''
