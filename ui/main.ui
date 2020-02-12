@@ -222,6 +222,40 @@
             </layout>
            </item>
            <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <item>
+              <widget class="QLabel" name="label_seqtimer">
+               <property name="text">
+                <string>Timer:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_11">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_seqtimer"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_sequnit">
+               <property name="text">
+                <string>second(s)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
             <widget class="QGroupBox" name="box_detailed">
              <property name="title">
               <string>Sequence</string>
@@ -571,7 +605,7 @@
              <item>
               <widget class="QLabel" name="label_dwellunit">
                <property name="text">
-                <string>second(s)</string>
+                <string>millisecond(s)</string>
                </property>
               </widget>
              </item>

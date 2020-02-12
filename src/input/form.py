@@ -31,6 +31,7 @@ class Inputs:
                  checkBox_dbid,
                  lineEdit_pupiltimer,
                  lineEdit_seqsize,
+                 lineEdit_seqtimer,
                  lineEdit_boardsizen,
                  lineEdit_boardsizem,
                  sequence,
@@ -42,6 +43,7 @@ class Inputs:
         self.checkBox_dbid = checkBox_dbid
         self.lineEdit_pupiltimer = lineEdit_pupiltimer
         self.lineEdit_seqsize = lineEdit_seqsize
+        self.lineEdit_seqtimer = lineEdit_seqtimer
         self.lineEdit_boardsizen = lineEdit_boardsizen
         self.lineEdit_boardsizem = lineEdit_boardsizem
         self.sequence = sequence
@@ -56,6 +58,8 @@ class Inputs:
         if pupil_timer.is_true: return pupil_timer
         seqsize = self.is_seqsize_number()
         if seqsize.is_true: return seqsize
+        seqtimer = self.is_seqtimer_number()
+        if seqtimer.is_true: return seqtimer
         is_seq_filled = self.is_seq_filled()
         if is_seq_filled.is_true: return is_seq_filled
         boardsize = self.is_board_filled()
@@ -75,6 +79,10 @@ class Inputs:
     def is_seqsize_number(self):
         error = is_value_number(self.lineEdit_seqsize.displayText(), "Sequence Size")
         if int(self.lineEdit_seqsize.displayText()) > 8: error.set_message("8 is Maximum Number!")
+        return error
+
+    def is_seqtimer_number(self):
+        error = is_value_number(self.lineEdit_seqtimer.displayText(), "Sequence Timer")
         return error
 
     def is_boardsize_number(self):
