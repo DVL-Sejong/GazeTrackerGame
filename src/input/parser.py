@@ -7,25 +7,25 @@ class Parser:
         self.inputs = inputs
 
     def pupil_time(self):
-        return self.inputs.lineEdit_pupiltimer.displayText() * 1000
+        return float(self.inputs.lineEdit_pupiltimer.displayText()) * 1000
 
     def sequence_time(self):
-        return self.inputs.lineEdit_seqtimer.displayText() * 1000
+        return float(self.inputs.lineEdit_seqtimer.displayText()) * 1000
 
     def dwell_time(self):
-        return self.inputs.lineEdit_dwell.displayText()
+        return float(self.inputs.lineEdit_dwell.displayText())
 
     def width(self):
-        return self.inputs.card.width.displayText()
+        return float(self.inputs.card.width.displayText())
 
     def height(self):
-        return self.inputs.card.height.displayText()
+        return float(self.inputs.card.height.displayText())
 
     def horizontal_margin(self):
-        return self.inputs.card.horizontal_margin.displayText()
+        return float(self.inputs.card.horizontal_margin.displayText())
 
     def vertical_margin(self):
-        return self.inputs.card.vertical_margin.displayText()
+        return float(self.inputs.card.vertical_margin.displayText())
 
     def get_time(self, status):
         if status == Status.PUPIL:
@@ -33,7 +33,7 @@ class Parser:
         elif status == Status.SEQUENCE:
             return self.sequence_time()
         elif status == Status.GAME:
-            return self.dwell_time()
+            return 10000000 * 1000
 
     def get_card_size(self):
         width = self.width()
@@ -46,6 +46,6 @@ class Parser:
         return horizontal_margin, vertical_margin
 
     def get_matrix_size(self):
-        n = self.inputs.lineEdit_boardsizen.displayText()
-        m = self.inputs.lineEdit_boardsizem.displayText()
+        n = int(self.inputs.lineEdit_boardsizen.displayText())
+        m = int(self.inputs.lineEdit_boardsizem.displayText())
         return n, m

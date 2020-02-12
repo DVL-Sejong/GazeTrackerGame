@@ -140,9 +140,9 @@ class Basic:
                        ['D', 'E', 'F'],
                        ['G', 'H', 'I'],
                        ['J', 'K', 'L']]
-        self.lineEdit_width = 50
-        self.lineEdit_height = 50
-        self.lineEdit_marginh = 10
-        self.lineEdit_marginv = 10
+        self.lineEdit_width = 150
+        self.lineEdit_height = 150
+        self.lineEdit_marginh = 50
+        self.lineEdit_marginv = 50
         self.lineEdit_dwell = 3000
 

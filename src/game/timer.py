@@ -1,12 +1,11 @@
-from PyQt5.QtCore import QThread, pyqtSignal, QTimer, QEventLoop, QTime
+from PyQt5.QtCore import QThread, QTimer, QEventLoop, QTime
 
 
 class GameTimer(QThread):
-    signal = pyqtSignal()
-
     def in_process(self):
         self.time = self.time.addMSecs(1)
-        print(self.time.msecsSinceStartOfDay())
+        if self.time.msecsSinceStartOfDay() % 1000 == 0:
+            print(self.time.msecsSinceStartOfDay())
         if self.time.msecsSinceStartOfDay() >= self.duration:
             self.terminate()
 

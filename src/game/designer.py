@@ -1,14 +1,11 @@
 from operator import eq
 
-from src.game.status import Status
-from src.input.parser import Parser
-
 
 class Designer:
-    def __init__(self, inputs, card):
+    def __init__(self, inputs, parser, card):
         self.inputs = inputs
+        self.parser = parser
         self.card = card
-        self.parser = Parser(inputs)
         self.count = 0
 
     def set_sequence_card(self):
@@ -17,28 +14,36 @@ class Designer:
         width, height = self.parser.get_card_size()
         horizontal_margin, vertical_margin = self.parser.get_margins()
 
+        for i in range(8):
+            self.card.sequence[i].hide()
+
         for i in range(size):
-            self.card.sequence[i].setText(sequence[i])
+            self.card.sequence[i].setText(sequence[i].displayText())
             self.card.sequence[i].setFixedWidth(width)
             self.card.sequence[i].setFixedHeight(height)
+            self.card.sequence[i].show()
 
-        self.card.seq_layout.setContentsMargins(horizontal_margin / 2, 0, horizontal_margin / 2, 0)
+        self.card.seq_layout.setSpacing(horizontal_margin)
 
     def set_game_card(self):
         n, m = self.parser.get_matrix_size()
         matrix = self.inputs.sequence.matrix
         width, height = self.parser.get_card_size()
         horizontal_margin, vertical_margin = self.parser.get_margins()
-        horizontal_margin = horizontal_margin / 2
-        vertical_margin = vertical_margin / 2
 
-        for i in range(n):
-            for j in range(m):
+        for i in range(5):
+            for j in range(5):
+                self.card.game[i][j].hide()
+
+        for i in range(m):
+            for j in range(n):
                 self.card.game[i][j].setText(matrix[i][j].displayText())
-                self.card.game[i][j].setFixedWidht(width)
+                self.card.game[i][j].setFixedWidth(width)
                 self.card.game[i][j].setFixedHeight(height)
+                self.card.game[i][j].show()
 
-        self.card.game_layout.setContentsMargins(horizontal_margin, vertical_margin, horizontal_margin, vertical_margin)
+        self.card.game_layout.setHorizontalSpacing(horizontal_margin)
+        self.card.game_layout.setVerticalSpacing(vertical_margin)
 
     def remove_number(self, i, j):
         if eq(self.card.geme[i][j].displayText(), ""): return
