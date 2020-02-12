@@ -5,7 +5,7 @@ from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 
 from gui.main import Ui_MainWindow
-from src.GameWindow import GameWindow
+from src.game.GameWindow import GameWindow
 from src.input.database import Database
 from src.exception import Error
 from src.input.form import Inputs
@@ -36,7 +36,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def init_objects(self):
         self.database = Database(self.table, self.lineEdit_dbid, self.checkBox_dbid)
         self.form = Inputs(self.lineEdit_dbid, self.checkBox_dbid,
-                           self.lineEdit_pupiltimer, self.lineEdit_seqsize,
+                           self.lineEdit_pupiltimer, self.lineEdit_seqsize, self.lineEdit_seqtimer,
                            self.lineEdit_boardsizen, self.lineEdit_boardsizem, self.sequence,
                            self.card, self.lineEdit_dwell,
                            self.radioButton_on, self.radioButton_off)
