@@ -9,6 +9,7 @@ from src.game.GameWindow import GameWindow
 from src.input.database import Database
 from src.exception import Error
 from src.input.form import Inputs
+from src.input.parser import Parser
 
 
 def warn(error):
@@ -110,6 +111,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if eq(sending_edit.objectName(), "lineEdit_boardsizem"):
             self.show_board_matrix()
 
+    def on_game_finish(self, data):
+        self.game_window.destroy()
+        self.database.save(data, Parser(self.form), self.size())
+
     def show_sequence_matrix(self):
         error = self.form.is_seqsize_number()
         warn(error)
@@ -137,7 +142,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         error = self.form.is_all_filled_properly()
         warn(error)
         if error.is_true is False:
-            self.game_window = GameWindow(self.form)
+            self.game_window = GameWindow(self, self.form)
             self.game_window.showFullScreen()
             self.game_window.setFixedSize(self.game_window.size())
 

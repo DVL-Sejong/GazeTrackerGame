@@ -89,3 +89,39 @@ class Database:
         dbconn.close()
 
         return True if count > 0 else False
+
+    def save(self, data, parser, size):
+        width, height = parser.get_card_size()
+        horizontal_margin, vertical_margin = parser.get_margins()
+
+        for i in range(len(data)):
+            tuple = {
+                'id': data[i].id,
+                'status': data[i].status,
+                't': self.t_index[i],
+                't_order': self.t_order[i],
+                'left_x': data[i].left_point.x,
+                'left_y': data[i].left_point.y,
+                'left_validity': data[i].left_point.validity,
+                'right_x': data[i].right_point.x,
+                'right_y': data[i].right_point.x,
+                'right_validity': data[i].right_point.validity,
+                'average_x': data[i].average_point.x,
+                'average_y': data[i].average_point.y,
+                'average_validity': data[i].average_point.validity,
+                'left_pupil_diameter': data[i].left_pupil.diameter,
+                'left_pupil_validity': data[i].left_pupil.validity,
+                'right_pupil_diameter': data[i].right_pupil.diameter,
+                'right_pupil_validity': data[i].right_pupil.validity,
+                'average_pupil_diameter': data[i].average_pupil.diameter,
+                'average_pupil_validity': data[i].average_pupil.validity,
+                'width': size.width(),
+                'height': size.height(),
+                'card_width': width,
+                'card_height': height,
+                'card_horizontal_margin': horizontal_margin,
+                'card_vertical_margin': vertical_margin
+            }
+
+            dbconstant.insert(table=dbconstant.TABLE, data=tuple)
+
