@@ -62,10 +62,10 @@ class Inputs:
         if seqtimer.is_true: return seqtimer
         is_seq_filled = self.is_seq_filled()
         if is_seq_filled.is_true: return is_seq_filled
-        boardsize = self.is_board_filled()
+        boardsize = self.is_boardsize_number()
         if boardsize.is_true: return boardsize
-        is_board_filled = self.is_board_filled()
-        if is_board_filled.is_true: return is_board_filled
+        board_filled = self.is_board_filled()
+        if board_filled.is_true: return board_filled
         card = self.is_card_filled()
         if card.is_true: return card
         dwell_timer = self.is_dwell_timer_numer()
@@ -105,9 +105,9 @@ class Inputs:
 
     def is_board_filled(self):
         error = Error()
-        for i in range(self.lineEdit_boardsizen):
-            for j in range(self.lineEdit_boardsizem):
-                if eq(self.sequence.matrix[i][j], ""):
+        for i in range(int(self.lineEdit_boardsizem.displayText())):
+            for j in range(int(self.lineEdit_boardsizen.displayText())):
+                if eq(self.sequence.matrix[i][j].displayText(), ""):
                     error.set_message("(%d, %d) Board Value is Not Filled!" % (i + 1, j + 1))
                     return error
         return error

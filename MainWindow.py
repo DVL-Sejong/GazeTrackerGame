@@ -165,7 +165,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if error.is_true is False:
             self.game_window = GameWindow(self, self.form)
             self.game_window.showFullScreen()
-            self.game_window.setFixedSize(self.game_window.size())
+            # self.game_window.setFixedSize(self.game_window.size())
 
 
 if __name__ == '__main__':
