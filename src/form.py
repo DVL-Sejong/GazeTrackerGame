@@ -27,18 +27,28 @@ def is_value_number(value, title):
 
 class Inputs:
     def __init__(self,
+                 lineEdit_dbid,
+                 checkBox_dbid,
                  lineEdit_pupiltimer,
                  lineEdit_seqsize,
                  lineEdit_boardsizen,
                  lineEdit_boardsizem,
                  sequence,
-                 lineEdit_dwell):
+                 card,
+                 lineEdit_dwell,
+                 radioButton_on,
+                 radioButton_off):
+        self.lineEdit_dbid = lineEdit_dbid
+        self.checkBox_dbid = checkBox_dbid
         self.lineEdit_pupiltimer = lineEdit_pupiltimer
         self.lineEdit_seqsize = lineEdit_seqsize
         self.lineEdit_boardsizen = lineEdit_boardsizen
         self.lineEdit_boardsizem = lineEdit_boardsizem
         self.sequence = sequence
+        self.card = card
         self.lineEdit_dwell = lineEdit_dwell
+        self.radioButton_on = radioButton_on
+        self.radioButton_off = radioButton_off
         self.seqsize = 0
 
     def is_all_filled_properly(self):
@@ -52,8 +62,11 @@ class Inputs:
         if boardsize.is_true: return boardsize
         is_board_filled = self.is_board_filled()
         if is_board_filled.is_true: return is_board_filled
+        card = self.is_card_filled()
+        if card.is_true: return card
         dwell_timer = self.is_dwell_timer_numer()
         if dwell_timer.is_true: return dwell_timer
+        return Error()
 
     def is_pupil_timer_number(self):
         error = is_value_number(self.lineEdit_pupiltimer.displayText(), "Pupil Timer")
@@ -90,6 +103,17 @@ class Inputs:
                     error.set_message("(%d, %d) Board Value is Not Filled!" % (i + 1, j + 1))
                     return error
         return error
+
+    def is_card_filled(self):
+        width = is_value_number(self.card.width.displayText(), "Card Width")
+        if width.is_true: return width
+        height = is_value_number(self.card.height.displayText(), "Card Height")
+        if height.is_true: return height
+        horizontal_margin = is_value_number(self.card.horizontal_margin.displayText(), "Horizontal Margin")
+        if horizontal_margin.is_true: return horizontal_margin
+        vertical_margin = is_value_number(self.card.vertical_margin.displayText(), "Vertical Margin")
+        if vertical_margin.is_true: return vertical_margin
+        return Error()
 
     def is_dwell_timer_numer(self):
         error = is_value_number(self.lineEdit_dwell.displayText(), "Dwell Timer")

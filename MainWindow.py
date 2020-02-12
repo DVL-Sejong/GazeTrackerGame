@@ -35,9 +35,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def init_objects(self):
         self.database = Database(self.table, self.lineEdit_dbid, self.checkBox_dbid)
-        self.form = Inputs(self.lineEdit_pupiltimer, self.lineEdit_seqsize,
+        self.form = Inputs(self.lineEdit_dbid, self.checkBox_dbid,
+                           self.lineEdit_pupiltimer, self.lineEdit_seqsize,
                            self.lineEdit_boardsizen, self.lineEdit_boardsizem, self.sequence,
-                           self.lineEdit_dwell)
+                           self.card, self.lineEdit_dwell,
+                           self.radioButton_on, self.radioButton_off)
         self.error = Error()
 
     def add_button_clicked(self):

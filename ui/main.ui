@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>684</width>
-    <height>1036</height>
+    <height>1366</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -320,32 +320,29 @@
               <string>Board Setting</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_15">
-              <item row="1" column="2">
-               <widget class="QLineEdit" name="lineEdit_board02"/>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lineEdit_board01"/>
               </item>
-              <item row="1" column="4">
-               <widget class="QLineEdit" name="lineEdit_board04"/>
+              <item row="4" column="2">
+               <widget class="QLineEdit" name="lineEdit_board32"/>
               </item>
               <item row="1" column="3">
                <widget class="QLineEdit" name="lineEdit_board03"/>
               </item>
-              <item row="1" column="1">
-               <widget class="QLineEdit" name="lineEdit_board01"/>
+              <item row="1" column="2">
+               <widget class="QLineEdit" name="lineEdit_board02"/>
+              </item>
+              <item row="2" column="4">
+               <widget class="QLineEdit" name="lineEdit_board14"/>
               </item>
               <item row="1" column="0">
                <widget class="QLineEdit" name="lineEdit_board00"/>
               </item>
-              <item row="2" column="0">
-               <widget class="QLineEdit" name="lineEdit_board10"/>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="lineEdit_board31"/>
               </item>
               <item row="2" column="1">
                <widget class="QLineEdit" name="lineEdit_board11"/>
-              </item>
-              <item row="3" column="4">
-               <widget class="QLineEdit" name="lineEdit_board24"/>
-              </item>
-              <item row="2" column="4">
-               <widget class="QLineEdit" name="lineEdit_board14"/>
               </item>
               <item row="3" column="1">
                <widget class="QLineEdit" name="lineEdit_board21"/>
@@ -353,26 +350,17 @@
               <item row="3" column="3">
                <widget class="QLineEdit" name="lineEdit_board23"/>
               </item>
-              <item row="3" column="0">
-               <widget class="QLineEdit" name="lineEdit_board20"/>
-              </item>
-              <item row="3" column="2">
-               <widget class="QLineEdit" name="lineEdit_board22"/>
-              </item>
-              <item row="4" column="1">
-               <widget class="QLineEdit" name="lineEdit_board31"/>
-              </item>
-              <item row="4" column="2">
-               <widget class="QLineEdit" name="lineEdit_board32"/>
+              <item row="4" column="3">
+               <widget class="QLineEdit" name="lineEdit_board33"/>
               </item>
               <item row="4" column="0">
                <widget class="QLineEdit" name="lineEdit_board30"/>
               </item>
-              <item row="4" column="3">
-               <widget class="QLineEdit" name="lineEdit_board33"/>
-              </item>
               <item row="4" column="4">
                <widget class="QLineEdit" name="lineEdit_board34"/>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLineEdit" name="lineEdit_board22"/>
               </item>
               <item row="2" column="3">
                <widget class="QLineEdit" name="lineEdit_board13"/>
@@ -380,20 +368,177 @@
               <item row="2" column="2">
                <widget class="QLineEdit" name="lineEdit_board12"/>
               </item>
+              <item row="3" column="4">
+               <widget class="QLineEdit" name="lineEdit_board24"/>
+              </item>
               <item row="5" column="0">
                <widget class="QLineEdit" name="lineEdit_board40"/>
               </item>
-              <item row="5" column="1">
-               <widget class="QLineEdit" name="lineEdit_board41"/>
+              <item row="3" column="0">
+               <widget class="QLineEdit" name="lineEdit_board20"/>
               </item>
-              <item row="5" column="2">
-               <widget class="QLineEdit" name="lineEdit_board42"/>
+              <item row="2" column="0">
+               <widget class="QLineEdit" name="lineEdit_board10"/>
+              </item>
+              <item row="1" column="4">
+               <widget class="QLineEdit" name="lineEdit_board04"/>
               </item>
               <item row="5" column="3">
                <widget class="QLineEdit" name="lineEdit_board43"/>
               </item>
+              <item row="5" column="2">
+               <widget class="QLineEdit" name="lineEdit_board42"/>
+              </item>
               <item row="5" column="4">
                <widget class="QLineEdit" name="lineEdit_board44"/>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="lineEdit_board41"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="box_card">
+             <property name="title">
+              <string>Card Setting</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QLabel" name="label_width">
+                  <property name="text">
+                   <string>Width:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_7">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_width"/>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_widthpx">
+                  <property name="text">
+                   <string>px</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <item>
+                 <widget class="QLabel" name="label_height">
+                  <property name="text">
+                   <string>Height:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_8">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_height"/>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_heightpx">
+                  <property name="text">
+                   <string>px</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_11">
+                <item>
+                 <widget class="QLabel" name="label_marginh">
+                  <property name="text">
+                   <string>Horizontal Margin:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_9">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_marginh"/>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_marginhpx">
+                  <property name="text">
+                   <string>px</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <item>
+                 <widget class="QLabel" name="label_marginv">
+                  <property name="text">
+                   <string>Vertical Margin:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_10">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_marginv"/>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_marginvpx">
+                  <property name="text">
+                   <string>px</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </widget>
@@ -491,6 +636,9 @@
               <widget class="QRadioButton" name="radioButton_on">
                <property name="text">
                 <string>On</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
