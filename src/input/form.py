@@ -126,3 +126,23 @@ class Inputs:
     def is_dwell_timer_numer(self):
         error = is_value_number(self.lineEdit_dwell.displayText(), "Dwell Timer")
         return error
+
+
+class Basic:
+    def __init__(self):
+        self.lineEdit_pupiltimer = 3
+        self.lineEdit_seqsize = 4
+        self.sequence = ['A', 'B', 'C', 'D']
+        self.lineEdit_seqtimer = 5
+        self.lineEdit_boardsizen = 3
+        self.lineEdit_boardsizem = 4
+        self.matrix = [['A', 'B', 'C'],
+                       ['D', 'E', 'F'],
+                       ['G', 'H', 'I'],
+                       ['J', 'K', 'L']]
+        self.lineEdit_width = 50
+        self.lineEdit_height = 50
+        self.lineEdit_marginh = 10
+        self.lineEdit_marginv = 10
+        self.lineEdit_dwell = 3000
+

@@ -8,7 +8,7 @@ from gui.main import Ui_MainWindow
 from src.game.GameWindow import GameWindow
 from src.input.database import Database
 from src.exception import Error
-from src.input.form import Inputs
+from src.input.form import Inputs, Basic
 from src.input.parser import Parser
 
 
@@ -33,6 +33,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.add_checkbox_changed()
         self.add_edit_entered()
         self.hide_boxes()
+        self.write_basics()
 
     def init_objects(self):
         self.database = Database(self.table, self.lineEdit_dbid, self.checkBox_dbid)
@@ -42,6 +43,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                            self.card, self.lineEdit_dwell,
                            self.radioButton_on, self.radioButton_off)
         self.error = Error()
+        self.basic = Basic()
 
     def add_button_clicked(self):
         self.pushButton_shortcuts.clicked.connect(self.on_click)
@@ -65,6 +67,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def hide_boxes(self):
         self.box_detailed.hide()
         self.box_board.hide()
+
+    def write_basics(self):
+        self.lineEdit_pupiltimer.setText(str(self.basic.lineEdit_pupiltimer))
+        self.lineEdit_seqsize.setText(str(self.basic.lineEdit_seqsize))
+        self.show_sequence_matrix()
+        for i in range(self.form.seqsize):
+            self.form.sequence.elements[i].setText(self.basic.sequence[i])
+        self.lineEdit_seqtimer.setText(str(self.basic.lineEdit_seqtimer))
+        self.lineEdit_boardsizen.setText(str(self.basic.lineEdit_boardsizen))
+        self.lineEdit_boardsizem.setText(str(self.basic.lineEdit_boardsizem))
+        self.show_board_matrix()
+        for i in range(self.basic.lineEdit_boardsizem):
+            for j in range(self.basic.lineEdit_boardsizen):
+                self.form.sequence.matrix[i][j].setText(self.basic.matrix[i][j])
+        self.lineEdit_width.setText(str(self.basic.lineEdit_width))
+        self.lineEdit_height.setText(str(self.basic.lineEdit_height))
+        self.lineEdit_marginh.setText(str(self.basic.lineEdit_marginh))
+        self.lineEdit_marginv.setText(str(self.basic.lineEdit_marginv))
+        self.lineEdit_dwell.setText(str(self.basic.lineEdit_dwell))
 
     @pyqtSlot()
     def on_click(self):
