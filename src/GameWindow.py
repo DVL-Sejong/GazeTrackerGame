@@ -38,9 +38,10 @@ class GameTimer(QThread):
 
 class GameWindow(QMainWindow, Ui_GameWindow):
 
-    def __init__(self):
+    def __init__(self, inputs):
         super().__init__()
         self.setupUi(self)
+        self.inputs = inputs
 
         self.status = Status.PUPIL
         self.start(3000)
@@ -66,8 +67,8 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         self.timer.start()
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = GameWindow()
-    ex.show()
-    sys.exit(app.exec_())
+# if __name__ == '__main__':
+#     app = QApplication(sys.argv)
+#     ex = GameWindow()
+#     ex.show()
+#     sys.exit(app.exec_())

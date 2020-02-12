@@ -6,9 +6,9 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 
 from gui.main import Ui_MainWindow
 from src.GameWindow import GameWindow
-from src.database import Database
+from src.input.database import Database
 from src.exception import Error
-from src.form import Inputs
+from src.input.form import Inputs
 
 
 def warn(error):
