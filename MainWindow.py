@@ -137,10 +137,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         error = self.form.is_all_filled_properly()
         warn(error)
         if error.is_true is False:
-            print("game")
-            # self.game_window = GameWindow()
-            # self.game_window.showFullScreen()
-            # self.game_window.setFixedSize(self.game_window.size())
+            self.game_window = GameWindow(self.form)
+            self.game_window.showFullScreen()
+            self.game_window.setFixedSize(self.game_window.size())
 
 
 if __name__ == '__main__':
