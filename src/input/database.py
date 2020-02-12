@@ -66,7 +66,7 @@ class Database:
         if len(self.lineEdit_dbid.displayText()) > 255: return False
         return True
 
-    def is_existing_id(self):
+    def get_dbconn(self):
         if self.custom_db_connectivity is True:
             dbconn = MYSQL(
                 dbhost=self.table.item(0, 0).text(),
@@ -84,6 +84,11 @@ class Database:
                 dbcharset=dbconstant.CHARSET
             )
 
+        return dbconn
+
+    def is_existing_id(self):
+        dbconn = self.get_dbconn()
+
         condition = {'id': self.lineEdit_dbid.displayText()}
         count = dbconn.count(table=dbconstant.TABLE, condition=condition)
         dbconn.close()
@@ -91,6 +96,7 @@ class Database:
         return True if count > 0 else False
 
     def save(self, data, parser, size):
+        dbconn = self.get_dbconn()
         width, height = parser.get_card_size()
         horizontal_margin, vertical_margin = parser.get_margins()
 
@@ -123,5 +129,5 @@ class Database:
                 'card_vertical_margin': vertical_margin
             }
 
-            dbconstant.insert(table=dbconstant.TABLE, data=tuple)
+            dbconn.insert(table=dbconstant.TABLE, data=tuple)
 
