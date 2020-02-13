@@ -68,7 +68,6 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         self.on_time()
 
     def splash(self, status):
-        print("splash")
         self.change_status(status)
         self.change_page(self.page_splash)
         self.splash_timer = SplashTimer(status, self.label_count)

@@ -22,7 +22,7 @@ class Ui_GameWindow(object):
         GameWindow.resize(2057, 1255)
         self.centralwidget = QtWidgets.QWidget(GameWindow)
         self.centralwidget.setAutoFillBackground(False)
-        self.centralwidget.setStyleSheet("")
+        self.centralwidget.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -316,12 +316,11 @@ class Ui_GameWindow(object):
         QtCore.QMetaObject.connectSlotsByName(GameWindow)
 
         self.initializeClass()
+        self.setCustomFont()
 
     def retranslateUi(self, GameWindow):
         _translate = QtCore.QCoreApplication.translate
         GameWindow.setWindowTitle(_translate("GameWindow", "MainWindow"))
-        self.label_pupil.setText(_translate("GameWindow", "<html><head/><body><p><span style=\" font-size:36pt; color:#ffffff;\">Pupil Check</span></p></body></html>"))
-        self.label_count.setText(_translate("GameWindow", "<html><head/><body><p><span style=\" font-size:72pt;\">5</span></p></body></html>"))
 
     def initializeClass(self):
         self.card = Card()
@@ -376,6 +375,19 @@ class Ui_GameWindow(object):
 
         self.card.seq_layout = self.horizontalLayout
         self.card.game_layout = self.gridLayout_game
+
+    def setCustomFont(self):
+        font = QtGui.QFont("Times", 60, QtGui.QFont.Bold)
+
+        self.label_count.setFont(font)
+        self.label_count.setStyleSheet("color: white;")
+        for label in self.card.sequence:
+            label.setFont(font)
+            label.setStyleSheet("color: white;")
+        for i in range(5):
+            for j in range(5):
+                self.card.game[i][j].setFont(font)
+                self.card.game[i][j].setStyleSheet("background-color: rgb(160, 160, 160); color: white;")
 
 
 if __name__ == "__main__":

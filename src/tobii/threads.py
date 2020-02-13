@@ -31,6 +31,7 @@ class CardThread(QThread):
             red, green, blue = self.rgb_to_black(red, green, blue)
             self.set_rgb(red, green, blue)
             if self.is_black():
+                self.label.setStyleSheet("background-color: rgb(0, 0, 0); color: black;")
                 self.terminate()
         else:
             red, green, blue = self.rgb_to_white(red, green, blue)
@@ -74,7 +75,7 @@ class CardThread(QThread):
     def set_rgb(self, red, green, blue):
         if red < 0 or green < 0 or blue < 0: return
         if red > 255 or green > 255 or blue > 255: return
-        stylesheet = "background-color: rgb(%d, %d, %d);" % (red, green, blue)
+        stylesheet = "background-color: rgb(%d, %d, %d); color: white;" % (red, green, blue)
         self.label.setStyleSheet(stylesheet)
 
     def is_black(self):
