@@ -36,9 +36,7 @@ class Inputs:
                  lineEdit_boardsizem,
                  sequence,
                  card,
-                 lineEdit_dwell,
-                 radioButton_on,
-                 radioButton_off):
+                 lineEdit_dwell):
         self.lineEdit_dbid = lineEdit_dbid
         self.checkBox_dbid = checkBox_dbid
         self.lineEdit_pupiltimer = lineEdit_pupiltimer
@@ -49,8 +47,6 @@ class Inputs:
         self.sequence = sequence
         self.card = card
         self.lineEdit_dwell = lineEdit_dwell
-        self.radioButton_on = radioButton_on
-        self.radioButton_off = radioButton_off
         self.seqsize = 0
 
     def is_all_filled_properly(self):

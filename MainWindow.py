@@ -40,8 +40,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.form = Inputs(self.lineEdit_dbid, self.checkBox_dbid,
                            self.lineEdit_pupiltimer, self.lineEdit_seqsize, self.lineEdit_seqtimer,
                            self.lineEdit_boardsizen, self.lineEdit_boardsizem, self.sequence,
-                           self.card, self.lineEdit_dwell,
-                           self.radioButton_on, self.radioButton_off)
+                           self.card, self.lineEdit_dwell)
         self.error = Error()
         self.basic = Basic()
 
