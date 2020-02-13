@@ -71,15 +71,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lineEdit_pupiltimer.setText(str(self.basic.lineEdit_pupiltimer))
         self.lineEdit_seqsize.setText(str(self.basic.lineEdit_seqsize))
         self.show_sequence_matrix()
+        sequence = self.basic.generate_sequence(self.basic.lineEdit_seqsize)
         for i in range(self.form.seqsize):
-            self.form.sequence.elements[i].setText(self.basic.sequence[i])
+            self.form.sequence.elements[i].setText(sequence[i])
         self.lineEdit_seqtimer.setText(str(self.basic.lineEdit_seqtimer))
         self.lineEdit_boardsizen.setText(str(self.basic.lineEdit_boardsizen))
         self.lineEdit_boardsizem.setText(str(self.basic.lineEdit_boardsizem))
         self.show_board_matrix()
+        matrix = self.basic.generate_matrix(self.basic.lineEdit_boardsizen, self.basic.lineEdit_boardsizem)
         for i in range(self.basic.lineEdit_boardsizem):
             for j in range(self.basic.lineEdit_boardsizen):
-                self.form.sequence.matrix[i][j].setText(self.basic.matrix[i][j])
+                self.form.sequence.matrix[i][j].setText(matrix[i][j])
         self.lineEdit_width.setText(str(self.basic.lineEdit_width))
         self.lineEdit_height.setText(str(self.basic.lineEdit_height))
         self.lineEdit_marginh.setText(str(self.basic.lineEdit_marginh))
@@ -143,8 +145,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.box_detailed.show()
             for element in self.form.sequence.elements:
                 element.hide()
+            sequence = self.basic.generate_sequence(self.form.seqsize)
             for i in range(self.form.seqsize):
                 self.form.sequence.elements[i].show()
+                self.form.sequence.elements[i].setText(sequence[i])
 
     def show_board_matrix(self):
         error = self.form.is_boardsize_number()
@@ -154,9 +158,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             for i in range(5):
                 for j in range(5):
                     self.form.sequence.matrix[i][j].hide()
+            n = int(self.form.lineEdit_boardsizen.displayText())
+            m = int(self.form.lineEdit_boardsizem.displayText())
+            matrix = self.basic.generate_matrix(n, m)
             for i in range(int(self.lineEdit_boardsizem.displayText())):
                 for j in range(int(self.lineEdit_boardsizen.displayText())):
                     self.form.sequence.matrix[i][j].show()
+                    self.form.sequence.matrix[i][j].setText(matrix[i][j])
 
     def game(self):
         error = self.form.is_all_filled_properly()

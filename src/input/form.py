@@ -1,3 +1,5 @@
+import random
+import string
 from operator import eq
 
 from src.exception import Error
@@ -126,19 +128,37 @@ class Inputs:
 
 class Basic:
     def __init__(self):
-        self.lineEdit_pupiltimer = 3
+        self.lineEdit_pupiltimer = 10
         self.lineEdit_seqsize = 4
-        self.sequence = ['A', 'B', 'C', 'D']
         self.lineEdit_seqtimer = 5
         self.lineEdit_boardsizen = 3
         self.lineEdit_boardsizem = 4
-        self.matrix = [['A', 'B', 'C'],
-                       ['D', 'E', 'F'],
-                       ['G', 'H', 'I'],
-                       ['J', 'K', 'L']]
         self.lineEdit_width = 300
         self.lineEdit_height = 300
         self.lineEdit_marginh = 80
         self.lineEdit_marginv = 80
         self.lineEdit_dwell = 3000
 
+    @staticmethod
+    def generate_sequence(seqsize):
+        sequence = []
+        upper_alphabet = string.ascii_uppercase
+        while True:
+            random_letter = random.choice(upper_alphabet)
+            if random_letter not in sequence:
+                sequence.append(random_letter)
+            if len(sequence) == seqsize: return sequence
+
+    @staticmethod
+    def generate_matrix(n, m):
+        matrix = []
+        alphabet = 'A'
+
+        for i in range(m):
+            row = []
+            for j in range(n):
+                row.append(alphabet)
+                alphabet = chr(ord(alphabet) + 1)
+            matrix.append(row)
+
+        return matrix
