@@ -85,8 +85,13 @@ class Inputs:
 
     def is_boardsize_number(self):
         error = is_value_number(self.lineEdit_boardsizem.displayText(), "Row")
+        if len(self.lineEdit_boardsizem.displayText()) == 0: error.set_message("m is NOT Entered!")
+        if error.is_true: return error
         if int(self.lineEdit_boardsizem.displayText()) > 5: error.set_message("5 is Maximum Number!")
+        if error.is_true: return error
         error = is_value_number(self.lineEdit_boardsizen.displayText(), "Column")
+        if len(self.lineEdit_boardsizen.displayText()) == 0: error.set_message("n is NOT Entered!")
+        if error.is_true: return error
         if int(self.lineEdit_boardsizen.displayText()) > 5: error.set_message("5 is Maximum Number!")
         return error
 
@@ -140,12 +145,13 @@ class Basic:
         self.lineEdit_dwell = 3000
 
     @staticmethod
-    def generate_sequence(seqsize):
+    def generate_sequence(seqsize, n, m):
         sequence = []
         upper_alphabet = string.ascii_uppercase
+        maximum = n * m
         while True:
             random_letter = random.choice(upper_alphabet)
-            if random_letter not in sequence:
+            if random_letter not in sequence and ord(random_letter) < 65 + maximum:
                 sequence.append(random_letter)
             if len(sequence) == seqsize: return sequence
 

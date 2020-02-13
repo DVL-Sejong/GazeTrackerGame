@@ -70,11 +70,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def write_basics(self):
         self.lineEdit_pupiltimer.setText(str(self.basic.lineEdit_pupiltimer))
         self.lineEdit_seqsize.setText(str(self.basic.lineEdit_seqsize))
-        self.show_sequence_matrix()
-        sequence = self.basic.generate_sequence(self.basic.lineEdit_seqsize)
-        for i in range(self.form.seqsize):
-            self.form.sequence.elements[i].setText(sequence[i])
-        self.lineEdit_seqtimer.setText(str(self.basic.lineEdit_seqtimer))
         self.lineEdit_boardsizen.setText(str(self.basic.lineEdit_boardsizen))
         self.lineEdit_boardsizem.setText(str(self.basic.lineEdit_boardsizem))
         self.show_board_matrix()
@@ -82,6 +77,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for i in range(self.basic.lineEdit_boardsizem):
             for j in range(self.basic.lineEdit_boardsizen):
                 self.form.sequence.matrix[i][j].setText(matrix[i][j])
+        self.show_sequence_matrix()
+        n = int(self.form.lineEdit_boardsizen.displayText())
+        m = int(self.form.lineEdit_boardsizem.displayText())
+        sequence = self.basic.generate_sequence(self.basic.lineEdit_seqsize, n, m)
+        for i in range(self.form.seqsize):
+            self.form.sequence.elements[i].setText(sequence[i])
+        self.lineEdit_seqtimer.setText(str(self.basic.lineEdit_seqtimer))
         self.lineEdit_width.setText(str(self.basic.lineEdit_width))
         self.lineEdit_height.setText(str(self.basic.lineEdit_height))
         self.lineEdit_marginh.setText(str(self.basic.lineEdit_marginh))
@@ -140,12 +142,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def show_sequence_matrix(self):
         error = self.form.is_seqsize_number()
         warn(error)
+        error = self.form.is_boardsize_number()
+        warn(error)
         if error.is_true is False:
             self.form.seqsize = int(self.lineEdit_seqsize.displayText())
             self.box_detailed.show()
             for element in self.form.sequence.elements:
                 element.hide()
-            sequence = self.basic.generate_sequence(self.form.seqsize)
+            n = int(self.form.lineEdit_boardsizen.displayText())
+            m = int(self.form.lineEdit_boardsizem.displayText())
+            sequence = self.basic.generate_sequence(self.form.seqsize, n, m)
             for i in range(self.form.seqsize):
                 self.form.sequence.elements[i].show()
                 self.form.sequence.elements[i].setText(sequence[i])
