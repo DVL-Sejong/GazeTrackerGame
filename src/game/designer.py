@@ -1,4 +1,7 @@
+import re
 from operator import eq
+
+from PyQt5.QtCore import QThread, QTimer, QTime, QEventLoop
 
 
 class Designer:

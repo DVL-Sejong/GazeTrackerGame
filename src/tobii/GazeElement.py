@@ -62,6 +62,8 @@ class GazeElement:
         self.left_point.y *= screen_size.height
         self.right_point.x *= screen_size.width
         self.right_point.y *= screen_size.height
+        self.average_point.x *= screen_size.width
+        self.average_point.y *= screen_size.height
 
     def extract_pupils(self):
         self.left_pupil.diameter = self.raw_data.get('left_pupil_diameter')

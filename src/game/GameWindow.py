@@ -9,6 +9,8 @@ from src.game.designer import Designer
 from src.game.status import Status
 from src.game.timer import GameTimer, SplashTimer
 from src.input.parser import Parser
+from src.tobii.objects import Size
+from src.tobii.threads import CardThread
 from src.tobii.tracker import Tobii
 
 
@@ -21,7 +23,7 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         self.inputs = inputs
         self.init_objects()
 
-        self.tobii = Tobii(self)
+        self.tobii = Tobii(self, inputs)
         self.start(Status.PUPIL, self.page_pupil)
         self.tobii.run()
 
@@ -37,6 +39,7 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         self.timer.finished.connect(self.on_finish)
         self.timer.duration = self.parser.get_time(self.status)
         self.timer.start()
+        if self.status == Status.GAME: self.watch()
 
     def on_finish(self):
         if self.status == Status.PUPIL:
@@ -65,11 +68,34 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         self.on_time()
 
     def splash(self, status):
+        print("splash")
         self.change_status(status)
         self.change_page(self.page_splash)
         self.splash_timer = SplashTimer(status, self.label_count)
         self.splash_timer.finished.connect(self.on_finish)
         self.splash_timer.start()
+
+    def watch(self):
+        self.init_card_threads()
+        self.count = 0
+
+    def init_card_threads(self):
+        self.card_threads = []
+        n, m = self.parser.get_matrix_size()
+        window_size = Size(self.geometry().width(), self.geometry().height())
+        for i in range(m):
+            for j in range(n):
+                card_thread = CardThread(self.card.game[i][j], self.parser, window_size, i, j, 0.8)
+                card_thread.finished.connect(self.on_card_finish)
+                self.card_threads.append(card_thread)
+                card_thread.start()
+
+    def on_card_finish(self):
+        self.count += 1
+        if self.count >= 4:
+            for thread in self.card_threads:
+                thread.is_finished = True
+            self.timer.terminate()
 
     def change_status(self, status):
         self.status = status
