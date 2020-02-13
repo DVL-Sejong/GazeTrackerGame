@@ -33,7 +33,7 @@ class Parser:
         elif status == Status.SEQUENCE:
             return self.sequence_time()
         elif status == Status.GAME:
-            return 10000000 * 1000
+            return 10 * 1000
 
     def get_card_size(self):
         width = self.width()

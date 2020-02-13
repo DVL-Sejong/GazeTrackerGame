@@ -4,8 +4,6 @@ from PyQt5.QtCore import QThread, QTimer, QEventLoop, QTime
 class GameTimer(QThread):
     def in_process(self):
         self.time = self.time.addMSecs(1)
-        if self.time.msecsSinceStartOfDay() % 1000 == 0:
-            print(self.time.msecsSinceStartOfDay())
         if self.time.msecsSinceStartOfDay() >= self.duration:
             self.terminate()
 

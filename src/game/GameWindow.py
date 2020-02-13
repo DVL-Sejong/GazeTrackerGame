@@ -19,9 +19,9 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         self.inputs = inputs
         self.init_objects()
 
-        # self.tobii = Tobii(self)
+        self.tobii = Tobii(self)
         self.start(Status.PUPIL, self.page_pupil)
-        # self.tobii.run()
+        self.tobii.run()
 
     def init_ui(self):
         self.stackedWidget.setCurrentWidget(self.page_pupil)
@@ -42,9 +42,9 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         elif self.status == Status.SEQUENCE:
             self.start(Status.GAME, self.page_game)
         elif self.status == Status.GAME:
-            # data = self.tobii.end()
+            data = self.tobii.end()
             self.deleteLater()
-            # self.main.on_game_finish(data)
+            self.main.on_game_finish(data)
 
     def start(self, status, page):
         self.change_status(status)

@@ -95,39 +95,43 @@ class Database:
 
         return True if count > 0 else False
 
-    def save(self, data, parser, size):
+    def save(self, result, parser, size):
         dbconn = self.get_dbconn()
         width, height = parser.get_card_size()
         horizontal_margin, vertical_margin = parser.get_margins()
 
-        for i in range(len(data)):
-            tuple = {
-                'id': data[i].id,
-                'status': data[i].status,
-                't': self.t_index[i],
-                't_order': self.t_order[i],
-                'left_x': data[i].left_point.x,
-                'left_y': data[i].left_point.y,
-                'left_validity': data[i].left_point.validity,
-                'right_x': data[i].right_point.x,
-                'right_y': data[i].right_point.x,
-                'right_validity': data[i].right_point.validity,
-                'average_x': data[i].average_point.x,
-                'average_y': data[i].average_point.y,
-                'average_validity': data[i].average_point.validity,
-                'left_pupil_diameter': data[i].left_pupil.diameter,
-                'left_pupil_validity': data[i].left_pupil.validity,
-                'right_pupil_diameter': data[i].right_pupil.diameter,
-                'right_pupil_validity': data[i].right_pupil.validity,
-                'average_pupil_diameter': data[i].average_pupil.diameter,
-                'average_pupil_validity': data[i].average_pupil.validity,
-                'width': size.width(),
-                'height': size.height(),
-                'card_width': width,
-                'card_height': height,
-                'card_horizontal_margin': horizontal_margin,
-                'card_vertical_margin': vertical_margin
-            }
+        for count in range(len(result.ranges)):
+            start, end = result.ranges[count]
+            t_index = result.t_index[count]
+            t_order = result.t_order[count]
+            for i in range(start, end):
+                tuple = {
+                    'id': result.data[i].id,
+                    'status': result.data[i].status.value,
+                    't': t_index[i - start],
+                    't_order': t_order[i - start],
+                    'left_x': result.data[i].left_point.x,
+                    'left_y': result.data[i].left_point.y,
+                    'left_validity': result.data[i].left_point.validity,
+                    'right_x': result.data[i].right_point.x,
+                    'right_y': result.data[i].right_point.x,
+                    'right_validity': result.data[i].right_point.validity,
+                    'average_x': result.data[i].average_point.x,
+                    'average_y': result.data[i].average_point.y,
+                    'average_validity': result.data[i].average_point.validity,
+                    'left_pupil_diameter': result.data[i].left_pupil.diameter,
+                    'left_pupil_validity': result.data[i].left_pupil.validity,
+                    'right_pupil_diameter': result.data[i].right_pupil.diameter,
+                    'right_pupil_validity': result.data[i].right_pupil.validity,
+                    'average_pupil_diameter': result.data[i].average_pupil.diameter,
+                    'average_pupil_validity': result.data[i].average_pupil.validity,
+                    'width': size.width(),
+                    'height': size.height(),
+                    'card_width': width,
+                    'card_height': height,
+                    'card_horizontal_margin': horizontal_margin,
+                    'card_vertical_margin': vertical_margin
+                }
 
-            dbconn.insert(table=dbconstant.TABLE, data=tuple)
+                dbconn.insert(table=dbconstant.TABLE, data=tuple)
 
