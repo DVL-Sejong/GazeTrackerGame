@@ -27,7 +27,7 @@ class CardThread(QThread):
                                                          self.proportion))
 
         red, green, blue = self.get_rgb()
-        if self.list.count(True) / len(self.list) >= 0.6:
+        if self.list.count(True) / len(self.list) >= 0.5:
             red, green, blue = self.rgb_to_black(red, green, blue)
             self.set_rgb(red, green, blue)
             if self.is_black():

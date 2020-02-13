@@ -162,10 +162,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def game(self):
         error = self.form.is_all_filled_properly()
         warn(error)
+        if self.checkBox_dbid.isChecked():
+            error = self.database.on_id_apply()
+            warn(error)
         if error.is_true is False:
             self.game_window = GameWindow(self, self.form)
             self.game_window.showFullScreen()
-            # self.game_window.setFixedSize(self.game_window.size())
 
 
 if __name__ == '__main__':
