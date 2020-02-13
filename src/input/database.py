@@ -1,6 +1,8 @@
 from datetime import datetime
 from operator import eq
 
+import pandas as pandas
+
 from database.lib import MYSQL
 import database.constant as dbconstant
 from src.exception import Error
@@ -91,7 +93,7 @@ class Database:
     def get_id(self):
         if self.checkBox_dbid.isChecked() is not True:
             return datetime.now().strftime("%y%m%d%H%M%S")
-        if self.is_valid_id():
+        if self.on_id_apply():
             return self.lineEdit_dbid.displayText()
 
     def is_existing_id(self):
@@ -108,6 +110,7 @@ class Database:
         width, height = parser.get_card_size()
         horizontal_margin, vertical_margin = parser.get_margins()
         id = self.get_id()
+        data_list = []
 
         for count in range(len(result.ranges)):
             start, end = result.ranges[count]
@@ -150,4 +153,8 @@ class Database:
                 }
 
                 dbconn.insert(table=dbconstant.TABLE, data=tuple)
+                data_list.append(tuple)
+
+        path = "Z:\\paper_workspace\\EuroVis_2020_short\\participant_data_csv\\%s.csv" % id
+        pandas.DataFrame(data_list).to_csv(path, index=False)
 
