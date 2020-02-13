@@ -91,7 +91,7 @@ class GameWindow(QMainWindow, Ui_GameWindow):
 
     def on_card_finish(self):
         self.count += 1
-        if self.count >= 4:
+        if self.count >= self.parser.seqsize():
             for thread in self.card_threads:
                 thread.is_finished = True
             self.timer.terminate()

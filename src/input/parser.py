@@ -14,6 +14,9 @@ class Parser:
     def sequence_time(self):
         return float(self.inputs.lineEdit_seqtimer.displayText()) * 1000
 
+    def seqsize(self):
+        return int(self.inputs.lineEdit_seqsize.displayText())
+
     def dwell_time(self):
         return float(self.inputs.lineEdit_dwell.displayText())
 
