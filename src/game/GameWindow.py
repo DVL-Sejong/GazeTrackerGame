@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication
 from gui.game import Ui_GameWindow
 from src.game.designer import Designer
 from src.game.status import Status
-from src.game.timer import GameTimer
+from src.game.timer import GameTimer, SplashTimer
 from src.input.parser import Parser
 from src.tobii.tracker import Tobii
 
@@ -38,10 +38,16 @@ class GameWindow(QMainWindow, Ui_GameWindow):
 
     def on_finish(self):
         if self.status == Status.PUPIL:
+            self.splash(Status.SPLASH_SEQUENCE)
+        elif self.status == Status.SPLASH_SEQUENCE:
             self.start(Status.SEQUENCE, self.page_sequence)
         elif self.status == Status.SEQUENCE:
+            self.splash(Status.SPLASH_GAME)
+        elif self.status == Status.SPLASH_GAME:
             self.start(Status.GAME, self.page_game)
         elif self.status == Status.GAME:
+            self.splash(Status.SPLASH_END)
+        elif self.status == Status.SPLASH_END:
             data = self.tobii.end()
             self.deleteLater()
             self.main.on_game_finish(data)
@@ -51,6 +57,13 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         self.change_page(page)
         self.init_screen()
         self.on_time()
+
+    def splash(self, status):
+        self.change_status(status)
+        self.change_page(self.page_splash)
+        self.splash_timer = SplashTimer(status, self.label_count)
+        self.splash_timer.finished.connect(self.on_finish)
+        self.splash_timer.start()
 
     def change_status(self, status):
         self.status = status

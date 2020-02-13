@@ -1,8 +1,10 @@
+from datetime import datetime
 from operator import eq
 
 from database.lib import MYSQL
 import database.constant as dbconstant
 from src.exception import Error
+from src.game.status import Status
 
 
 class Database:
@@ -86,6 +88,12 @@ class Database:
 
         return dbconn
 
+    def get_id(self):
+        if self.checkBox_dbid.isChecked() is not True:
+            return datetime.now().strftime("%y%m%d%H%M%S")
+        if self.is_valid_id():
+            return self.lineEdit_dbid.displayText()
+
     def is_existing_id(self):
         dbconn = self.get_dbconn()
 
@@ -95,18 +103,25 @@ class Database:
 
         return True if count > 0 else False
 
-    def save(self, result, parser, size):
+    def save(self, result, parser):
         dbconn = self.get_dbconn()
         width, height = parser.get_card_size()
         horizontal_margin, vertical_margin = parser.get_margins()
+        id = self.get_id()
 
         for count in range(len(result.ranges)):
             start, end = result.ranges[count]
             t_index = result.t_index[count]
             t_order = result.t_order[count]
+
+            if result.data[start].status != Status.PUPIL and \
+                    result.data[start].status != Status.SEQUENCE and \
+                    result.data[start].status != Status.GAME:
+                continue
+
             for i in range(start, end):
                 tuple = {
-                    'id': result.data[i].id,
+                    'id': id,
                     'status': result.data[i].status.value,
                     't': t_index[i - start],
                     't_order': t_order[i - start],
@@ -125,8 +140,8 @@ class Database:
                     'right_pupil_validity': result.data[i].right_pupil.validity,
                     'average_pupil_diameter': result.data[i].average_pupil.diameter,
                     'average_pupil_validity': result.data[i].average_pupil.validity,
-                    'width': size.width(),
-                    'height': size.height(),
+                    'width': result.data[i].screen_size.width,
+                    'height': result.data[i].screen_size.height,
                     'card_width': width,
                     'card_height': height,
                     'card_horizontal_margin': horizontal_margin,

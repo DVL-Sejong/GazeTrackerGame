@@ -134,7 +134,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def on_game_finish(self, data):
         self.game_window.destroy()
-        self.database.save(data, Parser(self.form), self.size())
+        self.database.save(data, Parser(self.form))
 
     def show_sequence_matrix(self):
         error = self.form.is_seqsize_number()

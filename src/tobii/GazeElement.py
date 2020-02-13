@@ -6,7 +6,6 @@ from src.tobii.objects import Point, Pupil, Size, Type
 class GazeElement:
     def __init__(self, raw_data):
         self.raw_data = raw_data
-        self.id = 0
         self.screen_size = Size(0, 0)
         self.status = 0
         self.timestamp = 0
@@ -18,7 +17,6 @@ class GazeElement:
         self.average_pupil = Pupil(0, 0)
 
     def initialize(self, screen_size):
-        self.id = self.raw_data.get('id')
         self.screen_size.set(screen_size)
         self.status = self.raw_data.get('status')
         self.timestamp = self.raw_data.get('device_time_stamp')

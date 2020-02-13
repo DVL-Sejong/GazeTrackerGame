@@ -7,7 +7,6 @@ class RawData:
     def __init__(self, screen_size, status):
         self.screen_size = screen_size
         self.status = status
-        self.id = datetime.now().strftime("%y%m%d%H%M%S")
         self.left_gaze_point_on_display_area = []
         self.right_gaze_point_on_display_area = []
         self.left_gaze_point_validity = []
@@ -35,7 +34,6 @@ class RawData:
         index = len(self.left_gaze_point_on_display_area) - 1
 
         dictionary = {
-            'id': self.id,
             'left_gaze_point_on_display_area': self.left_gaze_point_on_display_area[index],
             'right_gaze_point_on_display_area': self.right_gaze_point_on_display_area[index],
             'left_gaze_point_validity': self.left_gaze_point_validity[index],
