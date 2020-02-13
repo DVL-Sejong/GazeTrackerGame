@@ -27,7 +27,7 @@ class CardThread(QThread):
                                                          self.proportion))
 
         red, green, blue = self.get_rgb()
-        if self.list.count(True) / len(self.list) >= 0.5:
+        if self.list.count(True) / len(self.list) >= 0.4:
             red, green, blue = self.rgb_to_black(red, green, blue)
             self.set_rgb(red, green, blue)
             if self.is_black():
@@ -54,6 +54,7 @@ class CardThread(QThread):
         self.proportion = proportion
         self.list = []
         self.is_finished = False
+        self.set_rgb(self.parser.get_dwell_rgb(), self.parser.get_dwell_rgb(), self.parser.get_dwell_rgb())
 
     def run(self):
         self.timer.start(30)
@@ -84,4 +85,5 @@ class CardThread(QThread):
 
     def is_initial_color(self):
         red, green, blue = self.get_rgb()
-        return True if red == 160 and green == 160 and blue == 160 else False
+        color = self.parser.get_dwell_rgb()
+        return True if red == color and green == color and blue == color else False

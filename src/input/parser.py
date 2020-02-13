@@ -51,6 +51,10 @@ class Parser:
         elif status == Status.GAME:
             return 2000 * 1000
 
+    def get_dwell_rgb(self):
+        dwell = self.dwell_time()
+        return int((dwell / 30) - 20)
+
     def get_card_size(self):
         width = self.width()
         height = self.height()

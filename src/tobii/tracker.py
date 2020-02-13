@@ -56,8 +56,6 @@ class Tobii():
             x = element.average_point.x
             y = element.average_point.y
 
-        # self.window.card_thread.x = x
-        # self.window.card_thread.y = y
         for thread in self.window.card_threads:
             thread.x = x
             thread.y = y
