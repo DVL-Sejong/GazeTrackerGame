@@ -27,5 +27,6 @@ CREATE TABLE `game` (
   `right_pupil_diameter` double DEFAULT NULL,
   `right_pupil_validity` int(11) DEFAULT NULL,
   `average_pupil_diameter` double DEFAULT NULL,
-  `average_pupil_validity` int(11) DEFAULT NULL
+  `average_pupil_validity` int(11) DEFAULT NULL,
+  `is_wandering` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

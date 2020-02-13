@@ -15,6 +15,7 @@ class GazeElement:
         self.left_pupil = Pupil(0, 0)
         self.right_pupil = Pupil(0, 0)
         self.average_pupil = Pupil(0, 0)
+        self.is_wandering = False
 
     def initialize(self, screen_size):
         self.screen_size.set(screen_size)

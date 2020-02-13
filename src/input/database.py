@@ -145,7 +145,8 @@ class Database:
                     'card_width': width,
                     'card_height': height,
                     'card_horizontal_margin': horizontal_margin,
-                    'card_vertical_margin': vertical_margin
+                    'card_vertical_margin': vertical_margin,
+                    'is_wandering': 1 if result.data[i].is_wandering else 0
                 }
 
                 dbconn.insert(table=dbconstant.TABLE, data=tuple)

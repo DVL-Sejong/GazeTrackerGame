@@ -1,4 +1,6 @@
 import tobii_research as tr
+from PyQt5 import QtGui
+from PyQt5.QtCore import Qt
 from PyQt5.QtCore import QThread, pyqtSignal
 
 from src.tobii.RawData import RawData
@@ -14,6 +16,7 @@ class Tobii():
         self.data = []
         self.plot_thread = PlotThread(self.window)
         self.plot_thread.signal.connect(self.on_plot)
+        self.is_wandering = False
 
     def run(self):
         self.tobii.subscribe_to(tr.EYETRACKER_GAZE_DATA, self.plot_thread.gaze_data_callback, as_dictionary=True)
@@ -26,7 +29,9 @@ class Tobii():
         return organize_data
 
     def on_plot(self, element):
+        element.is_wandering = self.is_wandering
         self.data.append(element)
+        self.is_wandering = False
 
         # if self.data[-1].is_validate(constant.AVERAGE):
         #     self.paint.left = self.data.data[-1].left_point
@@ -50,6 +55,10 @@ class PlotThread(QThread):
         raw = RawData(self.window_size, self.window.status)
         element = raw.gaze_data_callback(gaze_data)
         self.signal.emit(element)
+
+    # def keyPressEvent(self, event: QtGui.QKeyEvent):
+    #     if event.key() == Qt.Key_Space:
+    #         print("pressed")
 
 
 

@@ -1,5 +1,7 @@
 import sys
 
+from PyQt5 import QtGui
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QApplication
 
 from gui.game import Ui_GameWindow
@@ -51,6 +53,10 @@ class GameWindow(QMainWindow, Ui_GameWindow):
             data = self.tobii.end()
             self.deleteLater()
             self.main.on_game_finish(data)
+
+    def keyPressEvent(self, event: QtGui.QKeyEvent):
+        if event.key() == Qt.Key_Space:
+            self.tobii.is_wandering = True
 
     def start(self, status, page):
         self.change_status(status)
