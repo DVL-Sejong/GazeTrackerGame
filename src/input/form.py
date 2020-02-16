@@ -1,5 +1,7 @@
 import random
 import string
+import time
+from datetime import datetime
 from operator import eq
 
 from src.exception import Error
@@ -144,27 +146,27 @@ class Basic:
         self.lineEdit_marginv = 80
         self.lineEdit_dwell = 3000
 
-    @staticmethod
-    def generate_sequence(seqsize, n, m):
+    def generate_sequence(self, seqsize, n, m):
         sequence = []
         upper_alphabet = string.ascii_uppercase
         maximum = n * m
         while True:
+            random.seed(time.time())
             random_letter = random.choice(upper_alphabet)
             if random_letter not in sequence and ord(random_letter) < 65 + maximum:
                 sequence.append(random_letter)
             if len(sequence) == seqsize: return sequence
 
-    @staticmethod
-    def generate_matrix(n, m):
+    def generate_matrix(self, n, m):
         matrix = []
-        alphabet = 'A'
+        sequence = self.generate_sequence(n * m, n, m)
 
+        index = 0
         for i in range(m):
             row = []
             for j in range(n):
-                row.append(alphabet)
-                alphabet = chr(ord(alphabet) + 1)
+                row.append(sequence[index])
+                index += 1
             matrix.append(row)
 
         return matrix

@@ -47,8 +47,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def add_button_clicked(self):
         self.pushButton_shortcuts.clicked.connect(self.on_click)
         self.pushButton_dbsetting.clicked.connect(self.on_click)
-        self.pushButton_seqsize.clicked.connect(self.on_click)
         self.pushButton_boardsize.clicked.connect(self.on_click)
+        self.pushButton_board.clicked.connect(self.on_click)
+        self.pushButton_seqsize.clicked.connect(self.on_click)
+        self.pushButton_sequence.clicked.connect(self.on_click)
         self.pushButton_start.clicked.connect(self.on_click)
         self.pushButton_ok.clicked.connect(self.on_shortcuts_click)
         self.pushButton_cancel.clicked.connect(self.on_database_click)
@@ -99,7 +101,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.stack.setCurrentWidget(self.page_database)
         if eq(sending_button.objectName(), "pushButton_seqsize"):
             self.show_sequence_matrix()
+        if eq(sending_button.objectName(), "pushButton_sequence"):
+            self.show_sequence_matrix()
         if eq(sending_button.objectName(), "pushButton_boardsize"):
+            self.show_board_matrix()
+        if eq(sending_button.objectName(), "pushButton_board"):
             self.show_board_matrix()
         if eq(sending_button.objectName(), "pushButton_start"):
             self.game()
