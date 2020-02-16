@@ -695,7 +695,12 @@
              </row>
              <row>
               <property name="text">
-               <string>TABLE</string>
+               <string>TABLE_GAME</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>TAGLE_INFO</string>
               </property>
              </row>
              <column>

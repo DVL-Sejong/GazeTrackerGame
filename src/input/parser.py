@@ -43,6 +43,21 @@ class Parser:
         m = int(self.inputs.lineEdit_boardsizem.displayText())
         return n, m
 
+    def get_board(self):
+        board = []
+        n, m = self.get_matrix_size()
+        for i in range(m):
+            for j in range(n):
+                board.append(self.inputs.sequence.matrix[i][j].displayText())
+        return ''.join([str(element) for element in board])
+
+    def get_sequence(self):
+        sequence = []
+        seqsize = self.seqsize()
+        for i in range(seqsize):
+            sequence.append(str(self.inputs.sequence.elements[i].displayText()))
+        return ''.join([str(element) for element in sequence])
+
     def get_time(self, status):
         if status == Status.PUPIL:
             return self.pupil_time()

@@ -30,3 +30,16 @@ CREATE TABLE `game` (
   `average_pupil_validity` int(11) DEFAULT NULL,
   `is_wandering` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `info` (
+  `id` varchar(255) NOT NULL,
+  `n` int(11) DEFAULT NULL,
+  `m` int(11) DEFAULT NULL,
+  `board` varchar(255) DEFAULT NULL,
+  `seqsize` int(11) DEFAULT NULL,
+  `sequence` varchar(255) DEFAULT NULL,
+  `pupil_timer` int(11) DEFAULT NULL,
+  `seq_timer` int(11) DEFAULT NULL,
+  `dwell_timer` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

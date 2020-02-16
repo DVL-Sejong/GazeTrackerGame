@@ -79,6 +79,8 @@ class Database:
                 dbname=self.table.item(3, 0).text(),
                 dbcharset=self.table.item(4, 0).text()
             )
+            table_game = self.table.item(5, 0).text()
+            table_info = self.table.item(6, 0).text()
         else:
             dbconn = MYSQL(
                 dbhost=dbconstant.HOST,
@@ -87,8 +89,10 @@ class Database:
                 dbname=dbconstant.DB_NAME,
                 dbcharset=dbconstant.CHARSET
             )
+            table_game = dbconstant.TABLE_GAME
+            table_info = dbconstant.TABLE_INFO
 
-        return dbconn
+        return dbconn, table_game, table_info
 
     def get_id(self):
         if self.checkBox_dbid.isChecked() is not True:
@@ -100,13 +104,13 @@ class Database:
         dbconn = self.get_dbconn()
 
         condition = {'id': self.lineEdit_dbid.displayText()}
-        count = dbconn.count(table=dbconstant.TABLE, condition=condition)
+        count = dbconn.count(table=dbconstant.TABLE_GAME, condition=condition)
         dbconn.close()
 
         return True if count > 0 else False
 
     def save(self, result, parser):
-        dbconn = self.get_dbconn()
+        dbconn, table_game, table_info = self.get_dbconn()
         width, height = parser.get_card_size()
         horizontal_margin, vertical_margin = parser.get_margins()
         id = self.get_id()
@@ -152,8 +156,23 @@ class Database:
                     'is_wandering': 1 if result.data[i].is_wandering else 0
                 }
 
-                dbconn.insert(table=dbconstant.TABLE, data=tuple)
+                dbconn.insert(table=table_game, data=tuple)
                 data_list.append(tuple)
+
+        n, m = parser.get_matrix_size()
+        tuple = {
+            'id': id,
+            'n': n,
+            'm': m,
+            'board': parser.get_board(),
+            'seqsize': parser.seqsize(),
+            'sequence': parser.get_sequence(),
+            'pupil_timer': int(parser.pupil_time()),
+            'seq_timer': int(parser.sequence_time()),
+            'dwell_timer': int(parser.dwell_time())
+        }
+
+        dbconn.insert(table=table_info, data=tuple)
 
         path = "Z:\\paper_workspace\\EuroVis_2020_short\\participant_data_csv\\%s.csv" % id
         pandas.DataFrame(data_list).to_csv(path, index=False)
