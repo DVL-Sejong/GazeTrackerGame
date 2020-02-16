@@ -106,7 +106,7 @@ class Parser:
         center_x, center_y = self.get_center_point(screen_size, i, j)
         proportional_width, proportional_height = self.get_proportional_size(proportion)
         distance = math.sqrt(pow(x - center_x, 2) + pow(y - center_y, 2))
-        if distance <= min(proportional_width, proportional_height):
+        if distance * 2 <= min(proportional_width, proportional_height):
             return True
         else:
             return False
