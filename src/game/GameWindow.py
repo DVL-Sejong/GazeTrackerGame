@@ -21,6 +21,7 @@ class GameWindow(QMainWindow, Ui_GameWindow):
         self.setupUi(self)
         self.main = MainWindow
         self.inputs = inputs
+        self.is_finished = False
         self.init_objects()
 
         self.tobii = Tobii(self, inputs)
@@ -60,6 +61,9 @@ class GameWindow(QMainWindow, Ui_GameWindow):
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         if event.key() == Qt.Key_Space:
             self.tobii.is_wandering = True
+        if event.key() == Qt.Key_Q:
+            self.is_finished = True
+            self.on_card_finish()
 
     def start(self, status, page):
         self.change_status(status)
@@ -91,7 +95,7 @@ class GameWindow(QMainWindow, Ui_GameWindow):
 
     def on_card_finish(self):
         self.count += 1
-        if self.count >= self.parser.seqsize():
+        if self.count >= self.parser.seqsize() or self.is_finished:
             for thread in self.card_threads:
                 thread.is_finished = True
             self.timer.terminate()
