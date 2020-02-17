@@ -101,10 +101,10 @@ class Database:
             return self.lineEdit_dbid.displayText()
 
     def is_existing_id(self):
-        dbconn = self.get_dbconn()
+        dbconn, table_game, table_info = self.get_dbconn()
 
         condition = {'id': self.lineEdit_dbid.displayText()}
-        count = dbconn.count(table=dbconstant.TABLE_GAME, condition=condition)
+        count = dbconn.count(table=table_game, condition=condition)
         dbconn.close()
 
         return True if count > 0 else False
